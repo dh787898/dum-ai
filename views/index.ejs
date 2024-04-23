@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=500, initial-scale=min">
+    <title>Generated Text</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="header-container">
+        <header class="header">
+            <a href="https://dumbbell-ai.com/" class="logo">
+                <img src="/logo.png" alt="Logo">
+            </a>
+        
+        </header>
+        </div>
+
+    <div class="full">
+    <div class="title"><h1>Votre programme</h1></div>
+    <div id="loading"><h3>chargement...</h3><br>
+    <p>ça peu prendre jusqu'à 60 secondes.</p>
+    </div>
+    <div id="content" style="display: none;"></div>
+    <div class="ad1">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'bc9f83fd68b40337c4c9a0ced9349c30',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+            document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/bc9f83fd68b40337c4c9a0ced9349c30/invoke.js"></scr' + 'ipt>');
+        </script>
+    </div>
+</div>
+
+    <script src="/socket.io/socket.io.js"></script> <!-- Include Socket.io library -->
+    <script>
+        const socket = io(); // Connect to the Socket.io server
+
+        // Listen for the 'contentGenerated' event from the server
+        socket.on('contentGenerated', (text) => {
+            const loading = document.getElementById("loading");
+            const content = document.getElementById("content");
+
+            // Show the content and hide the loading message
+            content.innerHTML = text;
+            content.style.display = "block";
+            loading.style.display = "none";
+        });
+
+        // Send a request to the server to generate content with the provided variables
+        socket.emit('generateContent', {
+            gender: '<%= gender %>',
+            age: '<%= age %>',
+            height: '<%= height %>',
+            weight: '<%= weight %>',
+            obj: '<%= obj %>',
+            exp: '<%= exp %>'
+
+        });
+    </script>
+</body>
+</html>
